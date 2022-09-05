@@ -1,0 +1,82 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;IMPORT tcb_list
+    2 00000000         ;IMPORT current_TCB
+    3 00000000         ;IMPORT current_task_id
+    4 00000000         ;IMPORT next_task_id
+    5 00000000         ;IMPORT max_task_num
+    6 00000000         ;IMPORT switch_current_TCB
+    7 00000000         ;IMPORT is_first_switch_task
+    8 00000000         
+    9 00000000         ;IMPORT now_tick
+   10 00000000         
+   11 00000000         ;PRESERVE8
+   12 00000000         ;THUMB
+   13 00000000         
+   14 00000000         ;AREA CODE, CODE, READONLY
+   15 00000000         
+   16 00000000         ;PendSV_Handler PROC 
+   17 00000000         ;EXPORT PendSV_Handler
+   18 00000000         
+   19 00000000         ;; turn off all interrupt
+   20 00000000         ;CPSID I
+   21 00000000         
+   22 00000000         
+   23 00000000         ;; check PSP, if PSP == 0, this is the first task switch
+                       
+   24 00000000         ;; so we can skip 'save context' and 'select next TCB' s
+                       tep
+   25 00000000         ;MRS R0, PSP
+   26 00000000         ;; if r0 == 0, jump to restore_context
+   27 00000000         ;; LDR R1, =is_first_switch_task
+   28 00000000         ;CBZ R0, restore_context
+   29 00000000         
+   30 00000000         ;save_context
+   31 00000000         ;MRS R0, PSP
+   32 00000000         ;STMDB R0!, {R4-R11}
+   33 00000000         ;LDR R1, =current_TCB
+   34 00000000         ;LDR R1, [R1]
+   35 00000000         ;STR R0, [R1]
+   36 00000000         
+   37 00000000         ;select_next_TCB
+   38 00000000         ;PUSH {LR}
+   39 00000000         ;BL switch_current_TCB
+   40 00000000         ;POP {LR}
+   41 00000000         
+   42 00000000         ;restore_context
+   43 00000000         ;LDR R0, =current_TCB
+   44 00000000         ;LDR R0, [R0]
+   45 00000000         ;LDR R0, [R0]
+   46 00000000         ;LDMIA R0!, {R4-R11}
+   47 00000000         ;MSR PSP, R0
+   48 00000000         ;ORR LR, LR, #0x4 ; R1 |= 0x04 : lr |= 32'b0000_0000_000
+                       0_0100
+   49 00000000         
+   50 00000000         ;; turn on all interrupt
+   51 00000000         ;CPSIE I
+   52 00000000         
+   53 00000000         ;; return
+   54 00000000         ;BX LR
+   55 00000000         
+   56 00000000         ;ENDP
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   57 00000000         
+   58 00000000         ;NOP
+   59 00000000         
+   60 00000000         ;END
+                       
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=..\obj\task_1.d -o..\obj\task_1.o -IC:\Users\56241\Desktop\FSTOS\U
+SER\RTE -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include -IC:\Keil
+_v5\ARM\CMSIS\Include --predefine="__UVISION_VERSION SETA 521" --predefine="STM
+32F10X_HD SETA 1" --list=..\obj\task.lst ..\os\task.s
+332 symbols in table
