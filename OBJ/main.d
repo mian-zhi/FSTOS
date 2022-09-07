@@ -8,7 +8,8 @@
 ..\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\main.o: ..\os\include\fstos.h
 ..\obj\main.o: ..\os\include\task.h
-..\obj\main.o: ..\os\include\fstos.h
 ..\obj\main.o: ..\os\include\config.h
+..\obj\main.o: ..\os\include\fstos.h
+..\obj\main.o: ..\os\include\list.h
 ..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h

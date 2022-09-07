@@ -16,8 +16,10 @@ stack_t stack_1[STACK_SIZE];
 
 void task1()
 {
+	int a[5] = {1,2,3,4,5};
 	for(;;)
 	{
+		print_stack();
 		printf("task1\r\n");
 		os_sleep_ms(1000);
 	}
@@ -27,6 +29,7 @@ void task2()
 {	
 	for(;;)
 	{
+		print_stack();
 		printf("task2\r\n");
 		os_sleep_ms(2000);
 	}
@@ -34,7 +37,6 @@ void task2()
 
 int main(void)
 {			
-	int i = 0;
 	Stm32_Clock_Init(9); //系统时钟设置
 	uart_init(72,9600);	 //串口初始化为9600
 

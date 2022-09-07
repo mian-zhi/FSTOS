@@ -1,6 +1,5 @@
 #include "task.h"
-#include "sys.h"
-#include "config.h"
+
 
 //定义任务列表
 Task_Control_Block_t tcb_list[CONFIG_MAX_TASK_NUM];
@@ -22,8 +21,15 @@ uint8_t task_switch_enable = 1;
 //用于记录现在的时间，用于延迟函数
 uint32_t now_tick = 0;
 
-#define STACK_IDLE_SIZE 32
+#define STACK_IDLE_SIZE 30
 stack_t stack_idle[STACK_IDLE_SIZE];
+
+void print_stack()
+{
+	int available_space = (stack_t*)current_TCB->stack - current_TCB->stack_buttom ;
+	printf("available space : %d\n\r",available_space);
+}
+
 /******************************************************
 函数功能：初始化任务控制，
           创建一个空闲任务
@@ -38,6 +44,8 @@ void Iint_task()
 {
 	Creat_task(task_idle,0,stack_idle,STACK_IDLE_SIZE);
 	current_TCB = &tcb_list[0];
+	print_stack();
+	printf("idle task has created");
 	__asm{
 		MOV R0 , 0X0
 		MSR PSP , R0
@@ -88,7 +96,10 @@ uint16_t Creat_task(void *function , void *arguments , stack_t *stack , int stac
 	*(--stack_top) = (stack_t)0x06060606u; // R6
 	*(--stack_top) = (stack_t)0x05050505u; // R5
 	*(--stack_top) = (stack_t)0x04040404u; // R4
+	
+	tcb_list[next_task_id].stack_buttom = stack;
 	tcb_list[next_task_id].stack = stack_top;
+	tcb_list[next_task_id].task_stack_size = stack_size;
 
 	return next_task_id++;
 }	
@@ -146,12 +157,10 @@ void os_sleep_ms(uint32_t ms) {
 //Systick中断函数 主要工作：记录系统时间，定时进行悬起PendSV中断
 void SysTick_Handler(void)
 {	
-	//printf("11");
 	now_tick++;//10ms
 	if (task_switch_enable) {
 			switch_task();
 	}
-	//if(now_tick%100 == 0) switch_task();
 }
 
 //void PendSV_Handler()

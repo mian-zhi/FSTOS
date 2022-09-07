@@ -2,17 +2,31 @@
 #define FSTOS_TASK_H
 
 #include <stdint.h>
+#include "sys.h"
 #include "usart.h"
+
+#include "config.h"
 #include "fstos.h"
+#include "list.h"
 
 #define CONFIG_MAX_TASK_NUM 8
 
 typedef uint32_t stack_t;
 
+//任务链表结点声明
 typedef struct{
-	void *stack;
+	int TCB_id;
+	struct Task_Control_Block_t * TCB_ptr;  //任务控制块指针
+	struct node *next;                      //指向下一个节点
+}node;
+
+typedef struct{
+	void *stack;            //栈顶指针
+	stack_t *stack_buttom;  //栈底指针
+	int task_stack_size;    //栈大小
 	uint32_t delay_ticks;
-}Task_Control_Block_t;  
+}Task_Control_Block_t; 
+
 
 //全局变量
 extern Task_Control_Block_t tcb_list[];      //任务列表
@@ -36,7 +50,9 @@ void Iint_task(void);
 uint16_t Creat_task(void *function , void *arguments , stack_t *stack , int stack_size);
 void os_sleep_us(uint32_t us);
 void os_sleep_ms(uint32_t ms);
-	
+
+//小功能
+void print_stack(void); //打印剩余堆栈
 
 //内部函数
 void task_idle(void);
