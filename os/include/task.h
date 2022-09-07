@@ -7,7 +7,6 @@
 
 #include "config.h"
 #include "fstos.h"
-#include "list.h"
 
 #define CONFIG_MAX_TASK_NUM 8
 

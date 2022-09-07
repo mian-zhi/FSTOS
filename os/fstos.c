@@ -5,6 +5,7 @@
 //初始化系统
 void FSTOS_init()
 {
+	init_memory();
 	Iint_task();
 }
 

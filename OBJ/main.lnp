@@ -5,7 +5,8 @@
 "..\obj\usart.o"
 "..\obj\led.o"
 "..\obj\fstos.o"
-"..\obj\task_1.o"
+"..\obj\task.o"
+"..\obj\heap.o"
 --strict --scatter "..\OBJ\main.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

@@ -439,6 +439,11 @@
               <FileType>1</FileType>
               <FilePath>..\os\task.c</FilePath>
             </File>
+            <File>
+              <FileName>heap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\os\heap.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

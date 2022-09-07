@@ -1,0 +1,10 @@
+..\obj\heap.o: ..\os\heap.c
+..\obj\heap.o: ..\os\include\heap.h
+..\obj\heap.o: ..\os\include\config.h
+..\obj\heap.o: ..\SYSTEM\usart\usart.h
+..\obj\heap.o: ..\SYSTEM\sys\sys.h
+..\obj\heap.o: ..\SYSTEM\sys\stm32f10x.h
+..\obj\heap.o: ..\SYSTEM\sys\core_cm3.h
+..\obj\heap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\heap.o: ..\SYSTEM\sys\system_stm32f10x.h
+..\obj\heap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -1,6 +1,7 @@
 #ifndef FSTOS_OS_H
 #define FSTOS_OS_H
 
+#include "heap.h"
 #include "task.h"
 #include "usart.h"	 
 #include "sys.h"

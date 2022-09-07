@@ -27,7 +27,12 @@ stack_t stack_idle[STACK_IDLE_SIZE];
 void print_stack()
 {
 	int available_space = (stack_t*)current_TCB->stack - current_TCB->stack_buttom ;
-	printf("available space : %d\n\r",available_space);
+	printf("\r\n**************************************************\r\n");
+	printf("*******************task info**********************\r\n");
+	printf("\r\nstack bottom : %X\r\n",current_TCB->stack_buttom);
+	printf("available space : %d\r\n",available_space);
+	printf("*******************task end***********************\r\n");
+	printf("**************************************************\r\n\r\n");
 }
 
 /******************************************************
@@ -45,7 +50,7 @@ void Iint_task()
 	Creat_task(task_idle,0,stack_idle,STACK_IDLE_SIZE);
 	current_TCB = &tcb_list[0];
 	print_stack();
-	printf("idle task has created");
+	printf("idle task has created\r\n");
 	__asm{
 		MOV R0 , 0X0
 		MSR PSP , R0

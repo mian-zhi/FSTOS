@@ -17,20 +17,22 @@ stack_t stack_1[STACK_SIZE];
 void task1()
 {
 	int a[5] = {1,2,3,4,5};
+	//print_stack();
 	for(;;)
 	{
-		print_stack();
-		printf("task1\r\n");
+		//print_stack();
+		//printf("task1\r\n");
 		os_sleep_ms(1000);
 	}
 }
 
 void task2()
 {	
+	//print_stack();
 	for(;;)
 	{
-		print_stack();
-		printf("task2\r\n");
+		//print_stack();
+		//printf("task2\r\n");
 		os_sleep_ms(2000);
 	}
 }
