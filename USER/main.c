@@ -38,7 +38,9 @@ void task2()
 }
 
 int main(void)
-{			
+{
+	void *p1;
+	void *p2 , *p3;
 	Stm32_Clock_Init(9); //系统时钟设置
 	uart_init(72,9600);	 //串口初始化为9600
 
@@ -46,6 +48,11 @@ int main(void)
 
 	Creat_task(task1,0,stack_0,STACK_SIZE);
 	Creat_task(task2,0,stack_1,STACK_SIZE);
+	
+	p1 = OSmalloc(16 * sizeof(char));
+	p2 = OSmalloc(16 * sizeof(int));
+	p3 = OSmalloc(32 * sizeof(int));
+	PrintHearStatus();
 	
 	FSTOS_start();
 	

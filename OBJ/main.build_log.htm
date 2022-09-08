@@ -22,18 +22,29 @@ Dialog DLL:      TARMSTM.DLL V1.65.0.0
  
 <h2>Project:</h2>
 D:\FSTOS\USER\FSTOS.uvprojx
-Project File Date:  09/01/2022
+Project File Date:  09/08/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-"..\OBJ\main.axf" - 0 Error(s), 0 Warning(s).
+compiling heap.c...
+..\os\heap.c(70): warning:  #940-D: missing return statement at end of non-void function "OSmalloc"
+  }
+..\os\heap.c(74): error:  #852: expression must be a pointer to a complete object type
+  	memory_node_t *node = (memory_node_t *)(point - sizeof(memory_node_t));
+..\os\heap.c(77): error:  #268: declaration may not appear after executable statement in block
+  	memory_node_t *prev = node->prev;  //??Ò»???Ú´æ¿éµ?Ö·
+..\os\heap.c(78): error:  #268: declaration may not appear after executable statement in block
+  	memory_node_t *next = node->next;  //??Ò»???Ú´æ¿éµ?Ö·
+..\os\heap.c: 1 warning, 3 errors
+"..\OBJ\main.axf" - 3 Error(s), 1 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   D:\FSTOS\USER\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
+Target not created.
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
