@@ -50,8 +50,17 @@ int main(void)
 	Creat_task(task2,0,stack_1,STACK_SIZE);
 	
 	p1 = OSmalloc(16 * sizeof(char));
-	p2 = OSmalloc(16 * sizeof(int));
-	p3 = OSmalloc(32 * sizeof(int));
+	//PrintHearStatus();
+	p2 = OSmalloc(16 * sizeof(char));
+	//PrintHearStatus();
+	p3 = OSmalloc(32 * sizeof(char));
+	PrintHearStatus();
+	
+	OSfree(p1);
+	PrintHearStatus();
+	OSfree(p3);
+	PrintHearStatus();
+	OSfree(p2);
 	PrintHearStatus();
 	
 	FSTOS_start();
